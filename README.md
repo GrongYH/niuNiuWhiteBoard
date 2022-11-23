@@ -27,13 +27,20 @@
 
 1. 用户通过牛牛白板的网址获取AK，在业务服务器配置时使用。
 
-1. 客户端 APP 将 room_uuid 和 user_uuid 作为参数请求客户的业务服务器，客户业务服务器通过 AK 签算出 RoomToken；
+2. 客户端 APP 将 room_uuid 和 user_uuid 作为参数请求客户的业务服务器，客户业务服务器通过 SK 签算出 RoomToken；
 
-1. 客户端 SDK 通过客户业务服务器签发的 RoomToken 请求 SDK server,  SDK server验证请求合法性后创建房间或者加入房间，返回sdk端的user_uuid和room_uuid。
+3. 客户端 SDK 通过客户业务服务器签发的 RoomToken 请求 SDK server,  SDK server验证请求合法性后创建房间或者加入房间，返回sdk端的user_uuid和room_uuid。
 
-1. 建立websocket持久连接，SDK和SDK server端进行消息交互。
+4. 建立websocket持久连接，SDK和SDK server端进行消息交互。
 
-![img](https://t7chv86kzc.feishu.cn/space/api/box/stream/download/asynccode/?code=NjIxNWZmYmQzNzU2NGZkZmJmYzJlNzkyZTkxMDUxMGJfRUVwRklwSXVYcFgxZmptYUZzVDRTaGY2cmdKMHZVeDRfVG9rZW46Ym94Y253YnZVQ1ozT1RyM3F4aHNVVThHd0tiXzE2NjgzOTQ5NzE6MTY2ODM5ODU3MV9WNA)
+为了让小画家更加注重于业务，让牛牛白板更加聚焦于白板能力本身，我们设计了如下架构。
+
+![image](https://user-images.githubusercontent.com/84149464/203590138-3e72b1a9-e288-4db4-be49-f150b90f39cb.png)
+
+后端连接管理如下
+![image](https://user-images.githubusercontent.com/84149464/203590695-f7527482-7e72-493d-ab26-1de9efedb22a.png)
+
+
 ## Web端演示视频
 
 见目录下视频文件
@@ -56,7 +63,7 @@ go build -o littlepainter cmd/main.go
 
 在niuNiuSDKBackend和niuNiuWhiteBoardBackend之下，各有一个models.sql。在mysql中建立两个数据库，database niuNiuSDK和database niuNiuWhiteBoard，分别导入对应目录下的models.sql。
 
-两个文件下各有一个yaml配置文件，将里面的数据库配置更改（尤其是dsn）。七牛服务的AK和SK不进行上传。牛牛白板SDK的AK可以继续使用。
+两个文件下各有一个yaml配置文件，将里面的数据库配置更改（尤其是dsn）。七牛服务的AK和SK不进行上传。牛牛白板SDK的SK可以继续使用。
 
 ## Android端运行
 
